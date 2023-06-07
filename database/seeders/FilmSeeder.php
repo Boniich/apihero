@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Character;
 use App\Models\Film;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,9 @@ class FilmSeeder extends Seeder
         $hero->created_date = "2021";
         $hero->score = 5;
 
+
         $hero->save();
+
+        $hero->characters()->sync(Character::all()->random(1));
     }
 }
