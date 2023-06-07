@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('characters', CharacterController::class);
+Route::get('searchCharacter/{name?}/{age?}', [CharacterController::class, 'search']);
 
 //devuelve Not found (404) en GETS
 Route::fallback(function () {

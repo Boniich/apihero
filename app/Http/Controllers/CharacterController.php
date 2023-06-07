@@ -112,4 +112,15 @@ class CharacterController extends Controller
 
         return response()->noContent();
     }
+
+    public function search($name = '', $age = '')
+    {
+        $character = Character::where('name', $name)->orWhere('age', $age)->get();
+
+        if (is_null($character)) {
+            return response()->json(['error:' => 'character not found'], 404);
+        }
+
+        return response()->json($character);
+    }
 }
