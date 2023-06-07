@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Character;
 use App\Models\Film;
 use Illuminate\Http\Request;
 
@@ -44,11 +45,14 @@ class FilmController extends Controller
 
         $film = Film::find($id);
 
+        $film->characters;
+
         if (is_null($film)) {
             return response()->json(['error:' => 'movie not found'], 404);
         }
 
-        $film = $film->makeHidden(['created_at', 'updated_at']);
+        $film->makeHidden(['created_at', 'updated_at']);
+        $film->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
         return $film;
     }
