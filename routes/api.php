@@ -25,12 +25,17 @@ Route::get('searchCharacter/{name?}/{age?}', [CharacterController::class, 'searc
 
 // films
 
+
+
 Route::get('movies', [FilmController::class, 'index']);
+Route::get('searchMovies/{title?}', [FilmController::class, 'search']);
 Route::get('movies/{id}', [FilmController::class, 'show']);
 Route::post('movies', [FilmController::class, 'store']);
 Route::put('movies/{id}', [FilmController::class, 'update']);
 Route::patch('movies/{id}', [FilmController::class, 'update']);
 Route::delete('movies/{id}', [FilmController::class, 'destroy']);
+
+
 
 //devuelve Not found (404) en GETS
 Route::fallback(function () {

@@ -88,4 +88,15 @@ class FilmController extends Controller
 
         return response()->noContent();
     }
+
+    public function search($title = '')
+    {
+        $film = Film::where('title', $title)->get();
+
+        if (is_null($film)) {
+            return response()->json(['error:' => 'film not found'], 404);
+        }
+
+        return response()->json($film);
+    }
 }
