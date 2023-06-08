@@ -6,6 +6,7 @@ use App\Models\Character;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CharacterController extends Controller
@@ -27,7 +28,7 @@ class CharacterController extends Controller
             $request->validate([
                 'name' => 'required',
                 'age' => 'required|integer',
-                'image' => 'required',
+                'image' => 'required|image',
                 'wight' => 'required|decimal:0,1000',
                 'history' => 'required|string|max:500'
             ]);
@@ -38,7 +39,10 @@ class CharacterController extends Controller
             $newCharacter->age = $request->age;
             $newCharacter->wight = $request->wight;
             $newCharacter->history = $request->history;
-            $newCharacter->image = $request->image;
+
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $newCharacter->image = $imageName;
+            Storage::disk('public')->put($imageName, file_get_contents($request->image));
 
             $newCharacter->save();
 
@@ -73,6 +77,15 @@ class CharacterController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            $request->validate([
+                'name' => 'required',
+                'age' => 'required|integer',
+                'image' => 'required|image',
+                'wight' => 'required|decimal:0,1000',
+                'history' => 'required|string|max:500'
+            ]);
+
             $character = Character::find($id);
 
             if (is_null($character)) {
@@ -83,7 +96,11 @@ class CharacterController extends Controller
             $character->age = $request->age;
             $character->wight = $request->wight;
             $character->history = $request->history;
-            $character->image = $request->image;
+
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            Storage::disk('public')->delete($character->image);
+            $character->image = $imageName;
+            Storage::disk('public')->put($imageName, file_get_contents($request->image));
 
             $character->update();
 
@@ -99,6 +116,8 @@ class CharacterController extends Controller
     public function destroy($id)
     {
         $character = Character::find($id);
+
+        Storage::disk('public')->delete($character->image);
 
         if (is_null($character)) {
             return response()->json(['error:' => 'character not found'], 404);
