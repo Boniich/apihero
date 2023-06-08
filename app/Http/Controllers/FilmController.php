@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
 {
@@ -28,7 +29,11 @@ class FilmController extends Controller
             $newFilm = new Film;
 
             $newFilm->title = $request->title;
-            $newFilm->image = $request->image;
+
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $newFilm->image  = $imageName;
+            Storage::disk('public')->put($imageName, file_get_contents($request->image));
+
             $newFilm->created_date = $request->created_date;
             $newFilm->score = $request->score;
 
@@ -75,7 +80,12 @@ class FilmController extends Controller
             }
 
             $film->title = $request->title;
-            $film->image = $request->image;
+
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            Storage::disk('public')->delete($film->image);
+            $film->image = $imageName;
+            Storage::disk('public')->put($imageName, file_get_contents($request->image));
+
             $film->created_date = $request->created_date;
             $film->score = $request->score;
 
@@ -112,6 +122,8 @@ class FilmController extends Controller
     public function search($title = '')
     {
         $film = Film::where('title', $title)->get();
+
+        Storage::disk('public')->delete($film->image);
 
         if (is_null($film)) {
             return response()->json(['error:' => 'film not found'], 404);
