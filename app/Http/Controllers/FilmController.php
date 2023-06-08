@@ -21,7 +21,8 @@ class FilmController extends Controller
                 'title' => 'required',
                 'image' => 'required',
                 'created_date' => 'required|string',
-                'score' => 'integer|min:0|max:5'
+                'score' => 'integer|min:0|max:5',
+                'characters' => 'required|integer'
             ]);
 
             $newFilm = new Film;
@@ -32,6 +33,13 @@ class FilmController extends Controller
             $newFilm->score = $request->score;
 
             $newFilm->save();
+
+            $newFilm->characters()->sync(Character::find($request->characters));
+
+            $newFilm->characters;
+
+            $newFilm->makeHidden(['created_at', 'updated_at']);
+            $newFilm->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
             return response()->json($newFilm);
         } catch (\Exception $ex) {
@@ -72,6 +80,14 @@ class FilmController extends Controller
             $film->score = $request->score;
 
             $film->update();
+
+            $film->characters()->sync(Character::find($request->characters));
+
+            $film->characters;
+
+            $film->makeHidden(['created_at', 'updated_at']);
+            $film->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
+
 
             return response()->json($film);
         } catch (\Throwable $th) {
