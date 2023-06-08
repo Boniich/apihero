@@ -19,14 +19,6 @@ class CharacterController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -62,11 +54,15 @@ class CharacterController extends Controller
     public function show($id)
     {
         $character = Character::find($id);
-        $character = $character->makeHidden(['created_at', 'updated_at']);
 
         if (is_null($character)) {
             return response()->json(['error:' => 'character not found'], 404);
         }
+
+        $character->films;
+
+        $character->makeHidden(['created_at', 'updated_at']);
+        $character->films->makeHidden(['created_at', 'updated_at', 'pivot']);
 
         return $character;
     }
