@@ -39,10 +39,7 @@ class CharacterController extends Controller
             $newCharacter->age = $request->age;
             $newCharacter->wight = $request->wight;
             $newCharacter->history = $request->history;
-
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            $newCharacter->image = $imageName;
-            Storage::disk('public')->put($imageName, file_get_contents($request->image));
+            $newCharacter->image = upLoadImage($request->image);
 
             $newCharacter->save();
 
@@ -96,11 +93,7 @@ class CharacterController extends Controller
             $character->age = $request->age;
             $character->wight = $request->wight;
             $character->history = $request->history;
-
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            Storage::disk('public')->delete($character->image);
-            $character->image = $imageName;
-            Storage::disk('public')->put($imageName, file_get_contents($request->image));
+            $character->image = updateLoadedImage($character->image, $request->image);
 
             $character->update();
 
@@ -117,7 +110,7 @@ class CharacterController extends Controller
     {
         $character = Character::find($id);
 
-        Storage::disk('public')->delete($character->image);
+        deleteLoadedImage($character->image);
 
         if (is_null($character)) {
             return response()->json(['error:' => 'character not found'], 404);

@@ -29,11 +29,7 @@ class FilmController extends Controller
             $newFilm = new Film;
 
             $newFilm->title = $request->title;
-
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            $newFilm->image  = $imageName;
-            Storage::disk('public')->put($imageName, file_get_contents($request->image));
-
+            $newFilm->image = upLoadImage($request->image);
             $newFilm->created_date = $request->created_date;
             $newFilm->score = $request->score;
 
@@ -80,12 +76,7 @@ class FilmController extends Controller
             }
 
             $film->title = $request->title;
-
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-            Storage::disk('public')->delete($film->image);
-            $film->image = $imageName;
-            Storage::disk('public')->put($imageName, file_get_contents($request->image));
-
+            $film->image = updateLoadedImage($film->image, $request->image);
             $film->created_date = $request->created_date;
             $film->score = $request->score;
 
@@ -110,6 +101,8 @@ class FilmController extends Controller
     {
         $film = Film::find($id);
 
+        deleteLoadedImage($film->image);
+
         if (is_null($film)) {
             return response()->json(['error:' => 'id not found'], 404);
         }
@@ -122,8 +115,6 @@ class FilmController extends Controller
     public function search($title = '')
     {
         $film = Film::where('title', $title)->get();
-
-        Storage::disk('public')->delete($film->image);
 
         if (is_null($film)) {
             return response()->json(['error:' => 'film not found'], 404);
