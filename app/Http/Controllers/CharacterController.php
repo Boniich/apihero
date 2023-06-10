@@ -40,7 +40,9 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        return Character::all(['name', 'image']);
+        $data = Character::all(['name', 'image']);
+
+        return response()->json(successResponse($data, "show all characters"));
     }
 
     /**
@@ -98,9 +100,9 @@ class CharacterController extends Controller
 
             $newCharacter->save();
 
-            return response()->json($newCharacter);
+            return response()->json(successResponse($newCharacter, "Character created"));
         } catch (\Exception $ex) {
-            return response()->json(['error' => 'Bad request'], 400);
+            return response()->json(errorResponse("Bad Request"), 400);
         }
     }
 
@@ -142,7 +144,7 @@ class CharacterController extends Controller
         $character = Character::find($id);
 
         if (is_null($character)) {
-            return response()->json(['error:' => 'character not found'], 404);
+            return response()->json(errorResponse("Character not found"), 404);
         }
 
         $character->films;
@@ -150,7 +152,7 @@ class CharacterController extends Controller
         $character->makeHidden(['created_at', 'updated_at']);
         $character->films->makeHidden(['created_at', 'updated_at', 'pivot']);
 
-        return $character;
+        return response()->json(successResponse($character, "Character retrieved successfully"));
     }
 
     /**
@@ -209,7 +211,7 @@ class CharacterController extends Controller
             $character = Character::find($id);
 
             if (is_null($character)) {
-                return response()->json(['error:' => 'character not found'], 404);
+                return response()->json(errorResponse("Character not found"), 404);
             }
 
             $character->name = $request->name;
@@ -220,9 +222,9 @@ class CharacterController extends Controller
 
             $character->update();
 
-            return response()->json($character);
+            return response()->json(successResponse($character, "Character updated successfully"));
         } catch (\Exception $ex) {
-            return response()->json(['error' => 'Bad request'], 400);
+            return response()->json(errorResponse("Bad Request"), 400);
         }
     }
 
@@ -260,13 +262,13 @@ class CharacterController extends Controller
         $character = Character::find($id);
 
         if (is_null($character)) {
-            return response()->json(['error:' => 'character not found'], 404);
+            return response()->json(errorResponse("Character not found"), 404);
         }
 
         deleteLoadedImage($character->image);
         $character->delete();
 
-        return response()->noContent();
+        return response()->json(successResponse($character, "Character deleted successfully"));
     }
 
     /**
@@ -316,9 +318,9 @@ class CharacterController extends Controller
         $character = Character::where('name', $name)->orWhere('age', $age)->get();
 
         if (is_null($character)) {
-            return response()->json(['error:' => 'character not found'], 404);
+            return response()->json(errorResponse("Character not found"), 404);
         }
 
-        return response()->json($character);
+        return response()->json(successResponse($character, "Character retrived successfully"));
     }
 }
