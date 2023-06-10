@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\FlareClient\Http\Exceptions\BadResponse;
 
 class FilmController extends Controller
 {
@@ -33,7 +34,9 @@ class FilmController extends Controller
 
     public function index()
     {
-        return Film::all('image', 'title', 'created_date');
+        $data = Film::all('image', 'title', 'created_date');
+
+        return response()->json(successResponse($data, "show all films"));
     }
 
     /**
@@ -142,10 +145,10 @@ class FilmController extends Controller
             $newFilm->makeHidden(['created_at', 'updated_at']);
             $newFilm->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
-            return response()->json($newFilm);
+            return response()->json(successResponse($newFilm, "movie created"));
         } catch (\Exception $ex) {
 
-            return response()->json(['error' => 'Bad request'], 400);
+            return response()->json(errorResponse("Bad Request"), 400);
         }
     }
 
@@ -189,14 +192,14 @@ class FilmController extends Controller
         $film = Film::find($id);
 
         if (is_null($film)) {
-            return response()->json(['error:' => 'movie not found'], 404);
+            return response()->json(errorResponse("Movie not found"), 404);
         }
 
         $film->characters;
         $film->makeHidden(['created_at', 'updated_at']);
         $film->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
-        return $film;
+        return response()->json(successResponse($film, "show a movie"));
     }
 
     /**
@@ -283,7 +286,7 @@ class FilmController extends Controller
             $film = Film::find($id);
 
             if (is_null($film)) {
-                return response()->json(['error:' => 'movie not found'], 404);
+                return response()->json(errorResponse("Movie not found"), 404);
             }
 
             $film->title = $request->title;
@@ -301,10 +304,10 @@ class FilmController extends Controller
             $film->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
 
-            return response()->json($film);
+            return response()->json(successResponse($film, "Movie updated"));
         } catch (\Throwable $th) {
 
-            return response()->json(['error' => 'Bad request']);
+            return response()->json(errorResponse("Bad Request"));
         }
     }
 
@@ -343,13 +346,13 @@ class FilmController extends Controller
         $film = Film::find($id);
 
         if (is_null($film)) {
-            return response()->json(['error:' => 'id not found'], 404);
+            return response()->json(errorResponse("Movie not found"), 404);
         }
 
         deleteLoadedImage($film->image);
         $film->delete();
 
-        return response()->noContent();
+        return response()->json(successResponse($film, "movie deleted"));
     }
 
     /**
@@ -390,9 +393,9 @@ class FilmController extends Controller
         $film = Film::where('title', $title)->get();
 
         if (is_null($film)) {
-            return response()->json(['error:' => 'film not found'], 404);
+            return response()->json(errorResponse("Movie not found"), 404);
         }
 
-        return response()->json($film);
+        return response()->json(successResponse($film, "success search"));
     }
 }
