@@ -188,12 +188,11 @@ class FilmController extends Controller
 
         $film = Film::find($id);
 
-        $film->characters;
-
         if (is_null($film)) {
             return response()->json(['error:' => 'movie not found'], 404);
         }
 
+        $film->characters;
         $film->makeHidden(['created_at', 'updated_at']);
         $film->characters->makeHidden(['created_at', 'updated_at', 'pivot']);
 
@@ -343,12 +342,11 @@ class FilmController extends Controller
     {
         $film = Film::find($id);
 
-        deleteLoadedImage($film->image);
-
         if (is_null($film)) {
             return response()->json(['error:' => 'id not found'], 404);
         }
 
+        deleteLoadedImage($film->image);
         $film->delete();
 
         return response()->noContent();
