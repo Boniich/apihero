@@ -1,0 +1,268 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ApiHeros Documentacion.",
+        "description": "An API about Marvel Heros and their movies.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/characters": {
+            "get": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Show a list of characters",
+                "description": "Display a listing of the resource.\nMostramos el listado de personajes.",
+                "operationId": "1797cf6529aea596ae858da8b98f8eff",
+                "responses": {
+                    "200": {
+                        "description": "Muestra todos los personajes"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Create a new character",
+                "description": "Create a new character.\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "age",
+                                    "wight",
+                                    "history",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Thor"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 10
+                                    },
+                                    "wight": {
+                                        "type": "decimal",
+                                        "format": "decimal",
+                                        "example": 10.5
+                                    },
+                                    "history": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Thorrrrr"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "image",
+                                        "example": "1686235605.png"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully created character"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            }
+        },
+        "/api/characters/{characters}": {
+            "get": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Show details about one character",
+                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "operationId": "455026e5b56faee384222c9350832542",
+                "parameters": [
+                    {
+                        "name": "characters",
+                        "in": "path",
+                        "description": "id of character",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra los detalles de un personaje"
+                    },
+                    "404": {
+                        "description": "Character not found"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Update a character's data",
+                "description": "Update a character's data",
+                "operationId": "d9d53c17e60b3bbdcad840b5cdca36db",
+                "parameters": [
+                    {
+                        "name": "characters",
+                        "in": "path",
+                        "description": "id of character",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "age",
+                                    "wight",
+                                    "history",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Thanos"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1000
+                                    },
+                                    "wight": {
+                                        "type": "decimal",
+                                        "format": "decimal",
+                                        "example": 300
+                                    },
+                                    "history": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Thanos is a villain"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "image",
+                                        "example": "1686235605.png"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Character updated"
+                    },
+                    "404": {
+                        "description": "Character not found"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Delete Character",
+                "description": "Delete a character",
+                "operationId": "dcf3216ac44927a7f0438a9dcb946294",
+                "parameters": [
+                    {
+                        "name": "characters",
+                        "in": "path",
+                        "description": "id of character",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete a character"
+                    },
+                    "404": {
+                        "description": "Character not found"
+                    },
+                    "default": {
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/api/searchCharacter/{name}/{age}": {
+            "get": {
+                "tags": [
+                    "characters"
+                ],
+                "summary": "Search a character",
+                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "operationId": "fffff3c31f30368f5ca8da10dbf8f60f",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of character",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "age of character",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra los detalles de un personaje"
+                    },
+                    "404": {
+                        "description": "Character not found"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            }
+        }
+    }
+}
