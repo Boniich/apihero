@@ -9,10 +9,110 @@ use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     * Mostramos el listado de personajes.
+     * 
+     * @OA\Get(
+     *      path="/api/movies",
+     *      tags={"Movies"},
+     *      summary="Show a list of movies",
+     * 
+     *      @OA\Response(
+     *          response=200,
+     *          description="Show all movies"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="An error has occurred"
+     *      )
+     * )
+     */
+
+
     public function index()
     {
         return Film::all('image', 'title', 'created_date');
     }
+
+    /**
+     * Create a new character.
+     * Note: This endpoint does not work in swagger cause is not possible upload an image here.
+     * @OA\Post(
+     *      path="/api/movies",
+     *      summary="Create a new movie",
+     *      tags={"Movies"},
+     * 
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *          required={"title","image","created_date", "score","characters"},
+     *          @OA\Property(property="title", type="string", format="string", example="Iron Man 2"),
+     *          @OA\Property(property="image", type="string", format="string", example="image-movie.png"),
+     *          @OA\Property(property="created_date", type="string", format="string", example="2010"),
+     *          @OA\Property(property="score", type="integer", format="string", example="5"),
+     *          @OA\Property(property="characters", type="array", example=
+     *                      {{
+     *                          "id": 4,
+     *                          "name": "Black Widow",
+     *                          "age": 30,
+     *                          "wight": 60.5,
+     *                          "history": "Samanta es Black Widow",
+     *                          "image": "imagen-black-widow.png"
+     *                      },
+     *                          },@OA\Items(
+     *                              @OA\Property(
+     *                                  property="id",
+     *                                  type="integer",
+     *                                  example=""
+     *                                  ),
+     *                             @OA\Property(
+     *                                 property="name",
+     *                                 type="string",
+     *                                 example=""
+     *                                 ),
+     *                             @OA\Property(
+     *                                 property="age",
+     *                                 type="integer",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="wight",
+     *                                 type="float",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="history",
+     *                                 type="string",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="image",
+     *                                 type="string",
+     *                                 example=""
+     *                        ),
+     *                    ),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfully created movie"  
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="bad request"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="An error has occurred"
+     *      )
+     * )
+     */
 
     public function store(Request $request)
     {
@@ -49,6 +149,40 @@ class FilmController extends Controller
         }
     }
 
+
+    /**
+     * Display the specified resource.
+     * Muestra los detalles de un personaje
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/api/movies/{id}",
+     *      tags={"Movies"},
+     *      summary="Show details about one movie",
+     * 
+     *      @OA\Parameter(
+     *          description="id of movie",
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Show Details about a movie"  
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Movie not found"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="Ha ocurrido un error"
+     *      )
+     * 
+     * )
+     */
+
     public function show($id)
     {
 
@@ -65,6 +199,84 @@ class FilmController extends Controller
 
         return $film;
     }
+
+    /**
+     * Create a new character.
+     * Note: This endpoint does not work in swagger cause is not possible upload an image here.
+     * @OA\Put(
+     *      path="/api/movies/{id}",
+     *      summary="update a movie",
+     *      tags={"Movies"},
+     * 
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *          required={"title","image","created_date", "score","characters"},
+     *          @OA\Property(property="title", type="string", format="string", example="Iron Man 2"),
+     *          @OA\Property(property="image", type="string", format="string", example="image-movie.png"),
+     *          @OA\Property(property="created_date", type="string", format="string", example="2010"),
+     *          @OA\Property(property="score", type="integer", format="string", example="5"),
+     *          @OA\Property(property="characters", type="array", example=
+     *                      {{
+     *                          "id": 4,
+     *                          "name": "Black Widow",
+     *                          "age": 30,
+     *                          "wight": 60.5,
+     *                          "history": "Samanta es Black Widow",
+     *                          "image": "imagen-black-widow.png"
+     *                      },
+     *                          },@OA\Items(
+     *                              @OA\Property(
+     *                                  property="id",
+     *                                  type="integer",
+     *                                  example=""
+     *                                  ),
+     *                             @OA\Property(
+     *                                 property="name",
+     *                                 type="string",
+     *                                 example=""
+     *                                 ),
+     *                             @OA\Property(
+     *                                 property="age",
+     *                                 type="integer",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="wight",
+     *                                 type="float",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="history",
+     *                                 type="string",
+     *                                 example=""
+     *                                 ),
+     * 
+     *                             @OA\Property(
+     *                                 property="image",
+     *                                 type="string",
+     *                                 example=""
+     *                        ),
+     *                    ),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfully updated movie"  
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="bad request"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="An error has occurred"
+     *      )
+     * )
+     */
 
     public function update(Request $request, $id)
     {
@@ -97,6 +309,36 @@ class FilmController extends Controller
         }
     }
 
+    /**
+     * Delete a moview
+     * @OA\Delete(
+     *      path="/api/movies/{id}",
+     *      summary="Delete a moview",
+     *      tags={"Movies"},
+     * 
+     *       @OA\Parameter(
+     *      
+     *          description="id of movie",
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Movie Deleted"  
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Movie not found"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="Error"
+     *      )
+     * )
+     */
+
     public function destroy($id)
     {
         $film = Film::find($id);
@@ -111,6 +353,39 @@ class FilmController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * Display the specified resource.
+     * Search moview
+     * @param string $title
+     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/api/searchMovies/{title}",
+     *      tags={"Movies"},
+     *      summary="Search a movie",
+     *      @OA\Parameter(
+     *      
+     *          description="title of a movie",
+     *          in="path",
+     *          name="title",
+     *          required=false,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Movie founded"  
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Movie not found"  
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="An error has occurred"
+     *      )
+     * 
+     * )
+     */
 
     public function search($title = '')
     {

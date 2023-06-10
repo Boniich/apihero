@@ -263,6 +263,320 @@
                     }
                 }
             }
+        },
+        "/api/movies": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Show a list of movies",
+                "description": "Display a listing of the resource.\nMostramos el listado de personajes.",
+                "operationId": "14fc0d823564c20338245148dd8dc10f",
+                "responses": {
+                    "200": {
+                        "description": "Show all movies"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Create a new movie",
+                "description": "Create a new character.\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
+                "operationId": "d4ae9efa728414b0b684fd5d53580460",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "image",
+                                    "created_date",
+                                    "score",
+                                    "characters"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Iron Man 2"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "image-movie.png"
+                                    },
+                                    "created_date": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "2010"
+                                    },
+                                    "score": {
+                                        "type": "integer",
+                                        "format": "string",
+                                        "example": "5"
+                                    },
+                                    "characters": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "age": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "wight": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": ""
+                                                },
+                                                "history": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "example": [
+                                            {
+                                                "id": 4,
+                                                "name": "Black Widow",
+                                                "age": 30,
+                                                "wight": 60.5,
+                                                "history": "Samanta es Black Widow",
+                                                "image": "imagen-black-widow.png"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully created movie"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            }
+        },
+        "/api/movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Show details about one movie",
+                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "operationId": "61fd57ff76975c10a6e00d48e5cfcdc9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of movie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show Details about a movie"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "update a movie",
+                "description": "Create a new character.\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
+                "operationId": "93fff05f18665591e47adb102d93d68a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "image",
+                                    "created_date",
+                                    "score",
+                                    "characters"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Iron Man 2"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "image-movie.png"
+                                    },
+                                    "created_date": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "2010"
+                                    },
+                                    "score": {
+                                        "type": "integer",
+                                        "format": "string",
+                                        "example": "5"
+                                    },
+                                    "characters": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "age": {
+                                                    "type": "integer",
+                                                    "example": ""
+                                                },
+                                                "wight": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": ""
+                                                },
+                                                "history": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": ""
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "example": [
+                                            {
+                                                "id": 4,
+                                                "name": "Black Widow",
+                                                "age": 30,
+                                                "wight": 60.5,
+                                                "history": "Samanta es Black Widow",
+                                                "image": "imagen-black-widow.png"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated movie"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Delete a moview",
+                "description": "Delete a moview",
+                "operationId": "2a39c1b73c6a24abb721df46697ee56c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of movie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie Deleted"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    },
+                    "default": {
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/api/searchMovies/{title}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Search a movie",
+                "description": "Display the specified resource.\nSearch moview",
+                "operationId": "e4db3620103b3e1a42de6856999e0a61",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "description": "title of a movie",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie founded"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            }
         }
     }
 }
