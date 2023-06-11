@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Spatie\FlareClient\Http\Exceptions\BadResponse;
 
@@ -126,7 +127,7 @@ class FilmController extends Controller
                 'image' => 'required',
                 'created_date' => 'required|string',
                 'score' => 'integer|min:0|max:5',
-                'characters' => 'required|integer'
+                'characters' => 'required|array'
             ]);
 
             $newFilm = new Film;
@@ -138,7 +139,7 @@ class FilmController extends Controller
 
             $newFilm->save();
 
-            $newFilm->characters()->sync(Character::find($request->characters));
+            $newFilm->characters()->attach(Character::find($request->characters));
 
             $newFilm->characters;
 
