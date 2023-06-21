@@ -9,23 +9,23 @@
         "/api/characters": {
             "get": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Show a list of characters",
-                "description": "Display a listing of the resource.\nMostramos el listado de personajes.",
+                "description": "Display a listing of the resource.",
                 "operationId": "1797cf6529aea596ae858da8b98f8eff",
                 "responses": {
                     "200": {
-                        "description": "Muestra todos los personajes"
+                        "description": "Show all characters"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error ocurred"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Create a new character",
                 "description": "Create a new character.\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
@@ -79,10 +79,10 @@
                         "description": "Successfully created character"
                     },
                     "400": {
-                        "description": "bad request"
+                        "description": "Bad request"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error ocurred"
                     }
                 }
             }
@@ -90,14 +90,14 @@
         "/api/characters/{characters}": {
             "get": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Show details about one character",
-                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "description": "Show details about one character",
                 "operationId": "455026e5b56faee384222c9350832542",
                 "parameters": [
                     {
-                        "name": "characters",
+                        "name": "Characters",
                         "in": "path",
                         "description": "id of character",
                         "required": true,
@@ -108,19 +108,19 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Muestra los detalles de un personaje"
+                        "description": "Show details about one character"
                     },
                     "404": {
                         "description": "Character not found"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error ocurred"
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Update a character's data",
                 "description": "Update a character's data",
@@ -188,13 +188,13 @@
                         "description": "Character not found"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error ocurred"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Delete Character",
                 "description": "Delete a character",
@@ -218,7 +218,7 @@
                         "description": "Character not found"
                     },
                     "default": {
-                        "description": "Error"
+                        "description": "An error ocurred"
                     }
                 }
             }
@@ -226,10 +226,10 @@
         "/api/searchCharacter/{name}/{age}": {
             "get": {
                 "tags": [
-                    "characters"
+                    "Characters"
                 ],
                 "summary": "Search a character",
-                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "description": "Search a character",
                 "operationId": "fffff3c31f30368f5ca8da10dbf8f60f",
                 "parameters": [
                     {
@@ -253,13 +253,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Muestra los detalles de un personaje"
+                        "description": "Retrive a character if according to the name or age"
                     },
                     "404": {
                         "description": "Character not found"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error ocurred"
                     }
                 }
             }
@@ -270,7 +270,7 @@
                     "Movies"
                 ],
                 "summary": "Show a list of movies",
-                "description": "Display a listing of the resource.\nMostramos el listado de personajes.",
+                "description": "Show all movies",
                 "operationId": "14fc0d823564c20338245148dd8dc10f",
                 "responses": {
                     "200": {
@@ -389,7 +389,7 @@
                     "Movies"
                 ],
                 "summary": "Show details about one movie",
-                "description": "Display the specified resource.\nMuestra los detalles de un personaje",
+                "description": "Show details about one movie",
                 "operationId": "61fd57ff76975c10a6e00d48e5cfcdc9",
                 "parameters": [
                     {
@@ -410,7 +410,7 @@
                         "description": "Movie not found"
                     },
                     "default": {
-                        "description": "Ha ocurrido un error"
+                        "description": "An error has occurred"
                     }
                 }
             },
@@ -419,7 +419,7 @@
                     "Movies"
                 ],
                 "summary": "update a movie",
-                "description": "Create a new character.\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
+                "description": "Update a movie\nNote: This endpoint does not work in swagger cause is not possible upload an image here.",
                 "operationId": "93fff05f18665591e47adb102d93d68a",
                 "requestBody": {
                     "required": true,
@@ -519,8 +519,8 @@
                 "tags": [
                     "Movies"
                 ],
-                "summary": "Delete a moview",
-                "description": "Delete a moview",
+                "summary": "Delete a movie",
+                "description": "Delete a movie",
                 "operationId": "2a39c1b73c6a24abb721df46697ee56c",
                 "parameters": [
                     {
@@ -552,7 +552,7 @@
                     "Movies"
                 ],
                 "summary": "Search a movie",
-                "description": "Display the specified resource.\nSearch moview",
+                "description": "Search movie",
                 "operationId": "e4db3620103b3e1a42de6856999e0a61",
                 "parameters": [
                     {

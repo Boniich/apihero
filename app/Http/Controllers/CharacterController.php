@@ -21,20 +21,18 @@ class CharacterController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * Mostramos el listado de personajes.
-     * 
      * @OA\Get(
      *      path="/api/characters",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      *      summary="Show a list of characters",
      * 
      *      @OA\Response(
      *          response=200,
-     *          description="Muestra todos los personajes"  
+     *          description="Show all characters"  
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error ocurred"
      *      )
      * )
      */
@@ -52,7 +50,7 @@ class CharacterController extends Controller
      *      path="/api/characters",
      *      operationId="store",
      *      summary="Create a new character",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      * 
      *      @OA\RequestBody(
      *          required=true,
@@ -71,11 +69,11 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response=400,
-     *          description="bad request"  
+     *          description="Bad request"  
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error ocurred"
      *      )
      * )
      */
@@ -107,26 +105,25 @@ class CharacterController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * Muestra los detalles de un personaje
+     * Show details about one character
      * @param int $id
      * @return \Illuminate\Http\Response
      * @OA\Get(
      *      path="/api/characters/{characters}",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      *      summary="Show details about one character",
      * 
      *      @OA\Parameter(
      *      
      *          description="id of character",
      *          in="path",
-     *          name="characters",
+     *          name="Characters",
      *          required=true,
      *          @OA\Schema(type="string"),
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Muestra los detalles de un personaje"  
+     *          description="Show details about one character"  
      *      ),
      *      @OA\Response(
      *          response=404,
@@ -134,7 +131,7 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error ocurred"
      *      )
      * 
      * )
@@ -159,7 +156,7 @@ class CharacterController extends Controller
      * Update a character's data
      * @OA\Put(
      *      path="/api/characters/{characters}",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      *      summary="Update a character's data",
      * 
      *      @OA\Parameter(
@@ -191,7 +188,7 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error ocurred"
      *      )
      * )
      */
@@ -233,7 +230,7 @@ class CharacterController extends Controller
      * @OA\Delete(
      *      path="/api/characters/{characters}",
      *      summary="Delete Character",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      * 
      *       @OA\Parameter(
      *      
@@ -253,7 +250,7 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Error"
+     *          description="An error ocurred"
      *      )
      * )
      */
@@ -272,14 +269,13 @@ class CharacterController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * Muestra los detalles de un personaje
+     * Search a character
      * @param string $name
      * @param string $age
      * @return \Illuminate\Http\Response
      * @OA\Get(
      *      path="/api/searchCharacter/{name}/{age}",
-     *      tags={"characters"},
+     *      tags={"Characters"},
      *      summary="Search a character",
      *      @OA\Parameter(
      *      
@@ -299,7 +295,7 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Muestra los detalles de un personaje"  
+     *          description="Retrive a character if according to the name or age"  
      *      ),
      *      @OA\Response(
      *          response=404,
@@ -307,7 +303,7 @@ class CharacterController extends Controller
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error ocurred"
      *      )
      * 
      * )

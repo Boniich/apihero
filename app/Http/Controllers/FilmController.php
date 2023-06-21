@@ -13,9 +13,7 @@ class FilmController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     * Mostramos el listado de personajes.
-     * 
+     * Show all movies
      * @OA\Get(
      *      path="/api/movies",
      *      tags={"Movies"},
@@ -155,8 +153,7 @@ class FilmController extends Controller
 
 
     /**
-     * Display the specified resource.
-     * Muestra los detalles de un personaje
+     * Show details about one movie
      * @param int $id
      * @return \Illuminate\Http\Response
      * @OA\Get(
@@ -181,7 +178,7 @@ class FilmController extends Controller
      *      ),
      *      @OA\Response(
      *          response="default",
-     *          description="Ha ocurrido un error"
+     *          description="An error has occurred"
      *      )
      * 
      * )
@@ -204,7 +201,7 @@ class FilmController extends Controller
     }
 
     /**
-     * Create a new character.
+     * Update a movie
      * Note: This endpoint does not work in swagger cause is not possible upload an image here.
      * @OA\Put(
      *      path="/api/movies/{id}",
@@ -313,10 +310,10 @@ class FilmController extends Controller
     }
 
     /**
-     * Delete a moview
+     * Delete a movie
      * @OA\Delete(
      *      path="/api/movies/{id}",
-     *      summary="Delete a moview",
+     *      summary="Delete a movie",
      *      tags={"Movies"},
      * 
      *       @OA\Parameter(
@@ -357,8 +354,7 @@ class FilmController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * Search moview
+     * Search movie
      * @param string $title
      * @return \Illuminate\Http\Response
      * @OA\Get(
