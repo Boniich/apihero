@@ -109,7 +109,7 @@ class CharacterController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      * @OA\Get(
-     *      path="/api/characters/{characters}",
+     *      path="/api/characters/{id}",
      *      tags={"Characters"},
      *      summary="Show details about one character",
      * 
@@ -117,7 +117,7 @@ class CharacterController extends Controller
      *      
      *          description="id of character",
      *          in="path",
-     *          name="Characters",
+     *          name="id",
      *          required=true,
      *          @OA\Schema(type="string"),
      *      ),
@@ -155,7 +155,7 @@ class CharacterController extends Controller
     /**
      * Update a character's data
      * @OA\Put(
-     *      path="/api/characters/{characters}",
+     *      path="/api/characters/{id}",
      *      tags={"Characters"},
      *      summary="Update a character's data",
      * 
@@ -163,7 +163,7 @@ class CharacterController extends Controller
      *      
      *          description="id of character",
      *          in="path",
-     *          name="characters",
+     *          name="id",
      *          required=true,
      *          @OA\Schema(type="string"),
      *      ),
@@ -228,7 +228,7 @@ class CharacterController extends Controller
     /**
      * Delete a character
      * @OA\Delete(
-     *      path="/api/characters/{characters}",
+     *      path="/api/characters/{id}",
      *      summary="Delete Character",
      *      tags={"Characters"},
      * 
@@ -236,7 +236,7 @@ class CharacterController extends Controller
      *      
      *          description="id of character",
      *          in="path",
-     *          name="characters",
+     *          name="id",
      *          required=true,
      *          @OA\Schema(type="string"),
      *      ),

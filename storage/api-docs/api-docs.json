@@ -87,17 +87,17 @@
                 }
             }
         },
-        "/api/characters/{characters}": {
+        "/api/characters/{id}": {
             "get": {
                 "tags": [
                     "Characters"
                 ],
                 "summary": "Show details about one character",
                 "description": "Show details about one character",
-                "operationId": "455026e5b56faee384222c9350832542",
+                "operationId": "cee1db67df83aac46e9d3a42d3ad8cb7",
                 "parameters": [
                     {
-                        "name": "Characters",
+                        "name": "id",
                         "in": "path",
                         "description": "id of character",
                         "required": true,
@@ -124,10 +124,10 @@
                 ],
                 "summary": "Update a character's data",
                 "description": "Update a character's data",
-                "operationId": "d9d53c17e60b3bbdcad840b5cdca36db",
+                "operationId": "46de201ac19b25577e1991a8c8f2abed",
                 "parameters": [
                     {
-                        "name": "characters",
+                        "name": "id",
                         "in": "path",
                         "description": "id of character",
                         "required": true,
@@ -198,10 +198,10 @@
                 ],
                 "summary": "Delete Character",
                 "description": "Delete a character",
-                "operationId": "dcf3216ac44927a7f0438a9dcb946294",
+                "operationId": "edc953591ab1fe3ba471b74b0abd718a",
                 "parameters": [
                     {
-                        "name": "characters",
+                        "name": "id",
                         "in": "path",
                         "description": "id of character",
                         "required": true,
