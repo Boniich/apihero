@@ -577,6 +577,106 @@
                     }
                 }
             }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user.",
+                "operationId": "2f25885f3b6f61ca11724ec302d2e439",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User register successfully"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "description": "Login User.",
+                "operationId": "0fc9610184083ac6dddab2c63139225a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User login successfully"
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "default": {
+                        "description": "An error has occurred"
+                    }
+                }
+            }
         }
     }
 }
